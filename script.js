@@ -597,6 +597,12 @@ $("#confirmOrder").addEventListener("click", async () => {
         || message.toLowerCase().includes("duplicated")
       ) {
         verification.textContent = "สลิปนี้ถูกใช้ตรวจสอบไปแล้ว กรุณาใช้สลิปใหม่";
+      } else if (
+        message.includes("SLIP_FLAGGED_AS_FRAUD")
+        || message.includes("200500")
+        || message.toLowerCase().includes("slip is fraud")
+      ) {
+        verification.textContent = "Slip2Go ไม่รองรับรูปแบบสลิป Bangkok Bank นี้ กรุณาใช้ไฟล์สลิปต้นฉบับจากแอป หรือติดต่อผู้ดูแลเพื่อตรวจสอบด้วยตนเอง";
       } else if (message.includes("receiver") || message.includes("ผู้รับ")) {
         verification.textContent = "บัญชีผู้รับในสลิปไม่ตรงกับบัญชีที่ตั้งไว้ กรุณาตรวจสอบการตั้งค่า K Plus Wallet";
       } else if (message.includes("amount") || message.includes("ยอดเงิน")) {
