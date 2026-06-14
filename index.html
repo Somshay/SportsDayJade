@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#82c99a">
+  <title>JADE | เสื้อทีมสีเขียว</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="background-orb orb-one"></div>
+  <div class="background-orb orb-two"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="JADE หน้าหลัก">
+      <span class="brand-icon">J</span>
+      <span>
+        <strong>JADE</strong>
+        <small>Green Team</small>
+      </span>
+    </a>
+    <button class="help-button" type="button" id="helpButton">วิธีสั่งซื้อ</button>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero">
+      <span class="eyebrow">JADE • GREEN TEAM 2026</span>
+      <h1>One team. One spirit. JADE.</h1>
+      <p>เลือกไซซ์เสื้อทีมสีเขียว ชำระเงิน และรับหลักฐานได้ง่าย ๆ ในไม่กี่ขั้นตอน</p>
+    </section>
+
+    <nav class="stepper" aria-label="ขั้นตอนการสั่งซื้อ">
+      <button class="step active" data-step-target="1" type="button">
+        <span>1</span>
+        <div><strong>ข้อมูลนักเรียน</strong><small>เลือกห้องและชื่อ</small></div>
+      </button>
+      <span class="step-line"></span>
+      <button class="step" data-step-target="2" type="button" disabled>
+        <span>2</span>
+        <div><strong>เลือกเสื้อ</strong><small>เลือกไซซ์ JADE</small></div>
+      </button>
+      <span class="step-line"></span>
+      <button class="step" data-step-target="3" type="button" disabled>
+        <span>3</span>
+        <div><strong>ชำระเงิน</strong><small>เลือกวิธีชำระ</small></div>
+      </button>
+    </nav>
+
+    <section class="form-card">
+      <div class="panel active" data-step="1">
+        <div class="panel-heading">
+          <span class="heading-icon">01</span>
+          <div>
+            <h2>เริ่มจากข้อมูลของคุณ</h2>
+            <p>เลือกชั้นเรียนก่อน แล้วรายชื่อในห้องจะปรากฏขึ้น</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <label class="field">
+            <span>ชั้น / ห้อง</span>
+            <select id="classSelect">
+              <option value="">เลือกชั้น / ห้อง</option>
+            </select>
+            <small class="error" id="classError"></small>
+          </label>
+          <label class="field">
+            <span>ชื่อนักเรียน</span>
+            <select id="studentSelect" disabled>
+              <option value="">กรุณาเลือกชั้นเรียนก่อน</option>
+            </select>
+            <small class="error" id="studentError"></small>
+          </label>
+        </div>
+
+        <div class="student-preview empty" id="studentPreview">
+          <div class="avatar">?</div>
+          <div><small>ข้อมูลผู้สั่งซื้อ</small><strong>ยังไม่ได้เลือกนักเรียน</strong></div>
+        </div>
+
+        <div class="existing-order-notice hidden" id="existingOrderNotice">
+          <span>!</span>
+          <div>
+            <strong>พบรายการสั่งซื้อเดิม</strong>
+            <small id="existingOrderDetail"></small>
+          </div>
+        </div>
+
+        <div class="actions right">
+          <button class="button primary" id="toStep2" type="button">เลือกเสื้อต่อ <span>→</span></button>
+        </div>
+      </div>
+
+      <div class="panel" data-step="2">
+        <div class="panel-heading">
+          <span class="heading-icon">02</span>
+          <div>
+            <h2>เสื้อที่ใช่ ในไซซ์ที่พอดี</h2>
+            <p>เสื้อ JADE สีเขียวพาสเทลและสีขาว เลือกขนาดที่พอดีกับคุณได้เลย</p>
+          </div>
+        </div>
+
+        <div class="shirt-layout">
+          <div>
+            <fieldset>
+              <legend>เลือกขนาดเสื้อ</legend>
+              <div class="size-options" id="sizeOptions"></div>
+            </fieldset>
+
+            <div class="size-guide">
+              <button class="text-button" id="sizeGuideButton" type="button">ดูตารางเทียบขนาด</button>
+              <p id="sizeMeasurement">เลือกไซซ์เพื่อดูขนาด</p>
+            </div>
+
+            <div class="team-lock">
+              <span class="team-lock-dot"></span>
+              <div><small>ทีมของคุณ • จำกัด 1 ตัวต่อคน</small><strong>JADE • สีเขียวพาสเทล-ขาว</strong></div>
+            </div>
+          </div>
+
+          <aside class="shirt-preview-card">
+            <div class="preview-heading">
+              <span class="preview-label">ตัวอย่างเสื้อ JADE</span>
+              <span class="preview-badge">ด้านหน้าและด้านหลัง</span>
+            </div>
+            <div class="shirt-stage">
+              <img
+                class="shirt-preview-image"
+                id="shirtPreview"
+                src="./assets/jade-shirt.png"
+                alt="ตัวอย่างเสื้อทีม JADE สีเขียวพาสเทลและสีขาว ด้านหน้าและด้านหลังพิมพ์คำว่า JADE"
+              >
+            </div>
+            <div class="preview-meta">
+              <div><small>ไซซ์</small><strong id="previewSize">-</strong></div>
+              <div><small>ทีม</small><strong>JADE</strong></div>
+              <div><small>ราคา</small><strong>฿200</strong></div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="actions split">
+          <button class="button secondary back-button" type="button">← ย้อนกลับ</button>
+          <button class="button primary" id="toStep3" type="button">ไปชำระเงิน <span>→</span></button>
+        </div>
+      </div>
+
+      <div class="panel" data-step="3">
+        <div class="panel-heading">
+          <span class="heading-icon">03</span>
+          <div>
+            <h2>เลือกวิธีชำระเงิน</h2>
+            <p>สะดวกแบบไหน เลือกได้เลย</p>
+          </div>
+        </div>
+
+        <div class="order-summary" id="orderSummary"></div>
+
+        <div class="payment-tabs">
+          <button class="payment-tab active" data-payment="qr" type="button">
+            <span class="payment-icon payment-icon-qr" aria-hidden="true">
+              <svg viewBox="0 0 32 32">
+                <path d="M5 3h7v3H8v4H5V3Zm15 0h7v7h-3V6h-4V3ZM5 20h3v4h4v3H5v-7Zm19 0h3v7h-7v-3h4v-4Z"/>
+                <rect x="10" y="10" width="4" height="4" rx="1"/>
+                <rect x="18" y="10" width="4" height="4" rx="1"/>
+                <rect x="10" y="18" width="4" height="4" rx="1"/>
+                <path d="M18 17h3v3h-3zm4 4h3v3h-3zm-5 3h3v3h-3z"/>
+              </svg>
+            </span>
+            <span><strong>สแกน QR Code</strong><small>ชำระทันทีและแนบสลิป</small></span>
+          </button>
+          <button class="payment-tab" data-payment="cash" type="button">
+            <span class="payment-icon payment-icon-wallet" aria-hidden="true">
+              <svg viewBox="0 0 32 32">
+                <path d="M6 8.5h18a3 3 0 0 1 3 3V14h-7a4 4 0 0 0 0 8h7v1.5a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-17a3 3 0 0 1 3-3h15v5"/>
+                <path d="M20 14h8v8h-8a4 4 0 0 1 0-8Z"/>
+                <circle cx="21" cy="18" r="1"/>
+              </svg>
+            </span>
+            <span><strong>ชำระเงินสด</strong><small>เลือกวันและจองคิว</small></span>
+          </button>
+        </div>
+
+        <div class="payment-panel active" data-payment-panel="qr">
+          <div class="qr-layout">
+            <div class="qr-card">
+              <img
+                class="payment-qr-photo"
+                src="./assets/payment-qr-borderless.png"
+                alt="Thai QR Payment PromptPay จำนวน 200 บาท"
+              >
+            </div>
+            <div class="upload-section">
+              <h3>อัปโหลดสลิปโอนเงิน</h3>
+              <p>รองรับไฟล์ JPG, PNG ขนาดไม่เกิน 5 MB</p>
+              <label class="upload-box" id="uploadBox">
+                <input type="file" id="slipInput" accept="image/png,image/jpeg">
+                <span class="upload-icon">↑</span>
+                <strong>กดเพื่อเลือกไฟล์ หรือลากไฟล์มาวาง</strong>
+                <small>ยังไม่ได้เลือกไฟล์</small>
+              </label>
+              <div class="slip-preview hidden" id="slipPreview">
+                <img id="slipImage" alt="ตัวอย่างสลิปที่อัปโหลด">
+                <div><strong id="slipName"></strong><small id="slipStatus">พร้อมส่งตรวจสอบ</small></div>
+                <button id="removeSlip" type="button" aria-label="ลบสลิป">×</button>
+              </div>
+              <div class="slip-verification hidden" id="slipVerification" role="status"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-panel" data-payment-panel="cash">
+          <div class="cash-layout">
+            <label class="field">
+              <span>วันที่สะดวกชำระ</span>
+              <input type="date" id="paymentDate">
+            </label>
+            <label class="field">
+              <span>สถานที่รับชำระ</span>
+              <input id="paymentLocation" type="text" value="กรุณาเลือกวันที่และเวลา" readonly>
+            </label>
+          </div>
+          <fieldset>
+            <legend>เลือกช่วงเวลา</legend>
+            <div class="time-options" id="timeOptions"></div>
+          </fieldset>
+        </div>
+
+        <div class="actions split">
+          <button class="button secondary back-button" type="button">← ย้อนกลับ</button>
+          <button class="button primary" id="confirmOrder" type="button">ยืนยันรายการ</button>
+        </div>
+      </div>
+
+      <div class="panel success-panel" data-step="success">
+        <div class="success-mark">✓</div>
+        <span class="eyebrow">ดำเนินการสำเร็จ</span>
+        <h2 id="successTitle">ส่งข้อมูลเรียบร้อยแล้ว</h2>
+        <p id="successMessage"></p>
+
+        <article class="receipt" id="receipt">
+          <div class="receipt-header">
+            <div class="brand">
+              <span class="brand-icon">J</span>
+              <span><strong>JADE</strong><small>หลักฐานการสั่งซื้อ</small></span>
+            </div>
+            <span class="status-badge" id="receiptStatus"></span>
+          </div>
+          <div class="receipt-number">
+            <small>หมายเลขอ้างอิง</small>
+            <strong id="referenceNumber"></strong>
+          </div>
+          <dl id="receiptDetails"></dl>
+          <div class="receipt-total"><span>ยอดรวม</span><strong>200.00 บาท</strong></div>
+          <p class="receipt-note" id="receiptNote"></p>
+        </article>
+
+        <div class="actions center">
+          <button class="button secondary" id="printReceipt" type="button">บันทึกหลักฐานเป็นรูปภาพ</button>
+          <button class="button primary" id="newOrder" type="button">ทำรายการใหม่</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop hidden" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <button class="modal-close" id="closeModal" type="button" aria-label="ปิด">×</button>
+      <span class="modal-icon">✓</span>
+      <h2 id="modalTitle">ยืนยันข้อมูลใช่ไหม?</h2>
+      <p>โปรดตรวจสอบชื่อ ไซซ์เสื้อ และวิธีชำระก่อนส่งข้อมูล</p>
+      <div class="modal-summary" id="modalSummary"></div>
+      <div class="actions split">
+        <button class="button secondary" id="cancelConfirm" type="button">ตรวจสอบอีกครั้ง</button>
+        <button class="button primary" id="finalConfirm" type="button">ยืนยันและส่งข้อมูล</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="infoModal" role="dialog" aria-modal="true">
+    <div class="modal">
+      <button class="modal-close close-info" type="button" aria-label="ปิด">×</button>
+      <span class="modal-icon">i</span>
+      <h2 id="infoTitle">วิธีสั่งซื้อ</h2>
+      <div id="infoContent">
+        <p>1. เลือกชั้น ห้อง และชื่อของนักเรียน</p>
+        <p>2. เลือกขนาดเสื้อและสีประจำทีม</p>
+        <p>3. สแกน QR พร้อมแนบสลิป หรือจองคิวชำระเงินสด</p>
+      </div>
+      <button class="button primary close-info" type="button">เข้าใจแล้ว</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+  <script src="supabase-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="supabase-backend.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
